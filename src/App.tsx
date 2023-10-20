@@ -6,33 +6,50 @@ import { Restaurant } from "./pages/Restaurant/Restaurant";
 import { Receiver } from "./pages/Receiver/Receiver";
 import { Register } from "./pages/Register/Register";
 import { Landing } from "./pages/Landing/Landing";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  IconButton,
+  Box,
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 function App() {
   return (
     <HashRouter>
-      <h1>Seiten</h1>
-      <br />
-      <ul>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-        <li>
-          <Link to="/restaurant">Restaurant</Link>
-        </li>
-        <li>
-          <Link to="/donor">Donor</Link>
-        </li>
-        <li>
-          <Link to="/receiver">Receiver</Link>
-        </li>
-      </ul>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <Box position={"absolute"} right={5} top={5}>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<HamburgerIcon />}
+            variant="outline"
+          />
+          <MenuList>
+            <MenuItem as={Link} to="/">
+              Home
+            </MenuItem>
+            <MenuItem as={Link} to="/register">
+              Register
+            </MenuItem>
+            <MenuItem as={Link} to="/restaurant">
+              Restaurant
+            </MenuItem>
+            <MenuItem as={Link} to="/donor">
+              Donor
+            </MenuItem>
+            <MenuItem as={Link} to="/receiver">
+              Receiver
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Box>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
