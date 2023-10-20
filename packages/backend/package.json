@@ -1,14 +1,23 @@
 {
-  "name": "jtabac-backend",
+  "name": "",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/functions/*.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo no build specified",
-    "start":"func start"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rimraf dist",
+    "prestart": "npm run clean && npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@azure/functions": "^4.0.0-alpha.9"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.x",
+    "@types/node": "18.x",
+    "typescript": "^4.0.0",
+    "rimraf": "^5.0.0"
+  }
 }
