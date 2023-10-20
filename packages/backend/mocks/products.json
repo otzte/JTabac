@@ -1,0 +1,77 @@
+{
+    "products" : [
+        {
+            "id" : 1,
+            "name" : "Fish with rice",
+            "productType": "food",
+            "amount" : 10,
+            "price" : 10,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 2,
+            "name" : "Indie concert",
+            "productType": "ticket",
+            "amount" : 100,
+            "price" : 5,
+            "commercialType" : "SALE"
+        },
+        {
+            "id" : 3,
+            "name" : "Indie concert",
+            "productType": "ticket",
+            "amount" : 100,
+            "price" : 5,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 4,
+            "name" : "Vegetable lasagna",
+            "productType": "food",
+            "amount" : 2,
+            "price" : 13,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 5,
+            "name" : "Wiener Schnitzel",
+            "productType": "food",
+            "amount" : 5,
+            "price" : 10,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 6,
+            "name" : "Spider Man 2 Cinema",
+            "productType": "ticket",
+            "amount" : 10,
+            "price" : 10,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 7,
+            "name" : "Spider Man 2 Cinema",
+            "productType": "ticket",
+            "amount" : 10,
+            "price" : 10,
+            "commercialType" : "SALE"
+        },
+        {
+            "id" : 8,
+            "name" : "Burger",
+            "productType": "food",
+            "amount" : 10,
+            "price" : 10,
+            "commercialType" : "DONATION"
+        },
+        {
+            "id" : 9,
+            "name" : "Pizza",
+            "productType": "food",
+            "amount" : 10,
+            "price" : 10,
+            "commercialType" : "DONATION"
+        }
+    ]
+}
+

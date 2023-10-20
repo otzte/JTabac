@@ -4,11 +4,11 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from "@azure/functions";
-import * as concerts from "../../mocks/concerts.json";
 import * as locations from "../../mocks/locations.json";
 import * as donors from "../../mocks/donors.json"
 import * as issuers from "../../mocks/isIssue.json"
 import * as receivers from "../../mocks/receiver.json"
+import * as products from "../../mocks/products.json";
 import { components } from "jtabac-schema"
 
 
@@ -20,8 +20,8 @@ export async function HttpMock(
   const category = request.params.category;
   console.log(category);
   //mock data
-  if (category === "concerts") {
-    const mockData = concerts;
+  if (category === "products") {
+    const mockData = products;
     return { jsonBody: mockData };
   }
   if (category === "locations") {
