@@ -22,42 +22,44 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 function App() {
   return (
-    <HashRouter>
-      <Box position={"absolute"} right={5} top={5}>
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<HamburgerIcon />}
-            variant="outline"
-          />
-          <MenuList>
-            <MenuItem as={Link} to="/">
-              Home
-            </MenuItem>
-            <MenuItem as={Link} to="/register">
-              Register
-            </MenuItem>
-            <MenuItem as={Link} to="/restaurant">
-              Restaurant
-            </MenuItem>
-            <MenuItem as={Link} to="/donor">
-              Donor
-            </MenuItem>
-            <MenuItem as={Link} to="/receiver">
-              Receiver
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Box>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/restaurant" element={<Restaurant />} />
-        <Route path="/donor" element={<Donor />} />
-        <Route path="/receiver" element={<Receiver />} />
-      </Routes>
-    </HashRouter>
+    <div style={{ position: "relative" }}>
+      <HashRouter>
+        <Box position={"absolute"} right={5} top={0}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<HamburgerIcon />}
+              variant="outline"
+            />
+            <MenuList>
+              <MenuItem as={Link} to="/">
+                Home
+              </MenuItem>
+              <MenuItem as={Link} to="/register">
+                Register
+              </MenuItem>
+              <MenuItem as={Link} to="/restaurant">
+                Restaurant
+              </MenuItem>
+              <MenuItem as={Link} to="/donor">
+                Donor
+              </MenuItem>
+              <MenuItem as={Link} to="/receiver">
+                Receiver
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/restaurant" element={<Restaurant />} />
+          <Route path="/donor" element={<Donor />} />
+          <Route path="/receiver" element={<Receiver />} />
+        </Routes>
+      </HashRouter>
+    </div>
   );
 }
 
