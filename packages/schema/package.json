@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "tsc --init",
-    "build": "npx openapi-typescript ./src/schema.json -o ./src/schema.ts && tsc"
+    "build": "npx openapi-typescript ./src/schema.json -o ./src/schema.ts && tsc",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
