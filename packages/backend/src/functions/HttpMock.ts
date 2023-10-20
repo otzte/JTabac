@@ -9,7 +9,9 @@ import * as locations from "../../mocks/locations.json";
 import * as donors from "../../mocks/donors.json"
 import * as issuers from "../../mocks/isIssue.json"
 import * as receivers from "../../mocks/receiver.json"
-import components from "jtabac-schema"
+import { components } from "jtabac-schema"
+
+type Product = components["schemas"]["Product"];
 
 export async function HttpMock(
   request: HttpRequest,
