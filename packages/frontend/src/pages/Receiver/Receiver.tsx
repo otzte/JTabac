@@ -30,6 +30,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { concertsState } from "../../state";
 
 type OfferType = "" | "food" | "concert" | "cinema" | "street-art" | "theater";
 
@@ -39,6 +41,7 @@ export const Receiver = () => {
   const [offer, setOffer] = useState<OfferType>();
   const [persons, setPersons] = useState<number>(1);
   const [visibleFilters, setVisibleFilters] = useState<FilterType[]>([]);
+  const concerts = useRecoilValue(concertsState);
 
   return (
     <Box margin={5}>
@@ -234,6 +237,38 @@ export const Receiver = () => {
                   <Button size="sm">Reservieren</Button>
                 </Td>
               </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        <Heading>... aus der Datenbank</Heading>
+        <TableContainer width={"100%"} whiteSpace={"normal"}>
+          <Table variant="simple">
+            <TableCaption>Angebote in deiner Nähe</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>Was</Th>
+                <Th>Wann</Th>
+                <Th>Kosten</Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {concerts.map((concert) => (
+                <Tr>
+                  <Td>{concert.interpret}</Td>
+                  <Td>{concert.data?.toLocaleDateString("de-DE")}</Td>
+                  <Td>
+                    {concert.price?.toLocaleString("de-DE", {
+                      style: "currency",
+                      currency: "EUR",
+                    })}
+                  </Td>
+                  <Td>
+                    <Button size="sm">Reservieren</Button>
+                  </Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </TableContainer>
