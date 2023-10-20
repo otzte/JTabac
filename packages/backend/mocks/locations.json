@@ -1,3 +1,5 @@
+{
+    "locations":
 [
     {
         "street": "Main Street",
@@ -35,3 +37,4 @@
         "id": 5
     }
 ]
+}
