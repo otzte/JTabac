@@ -1,0 +1,259 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "jtabac api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/reservations": {
+            "get": {
+                "summary": "Get all reservations",
+                "operationId": "getReservations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reservation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new reservation",
+                "operationId": "createReservation",
+                "requestBody": {
+                    "description": "Reservation to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reservation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "summary": "Get all products",
+                "operationId": "getProducts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new product",
+                "operationId": "createProduct",
+                "requestBody": {
+                    "description": "Product to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customers": {
+            "get": {
+                "summary": "Get all customers",
+                "operationId": "getCustomers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new customer",
+                "operationId": "createCustomer",
+                "requestBody": {
+                    "description": "Customer to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "productType": {
+                        "description": "either food or ticket",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "commmercialType": {
+                        "type": "string",
+                        "enum": [
+                            "DONATION",
+                            "SALE"
+                        ]
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "requester": {
+                        "$ref": "#/components/schemas/Customer"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ReservationStatus"
+                    }
+                }
+            },
+            "ReservationStatus": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "PENDING",
+                            "APPROVED",
+                            "REJECTED"
+                        ]
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "customer": {
+                        "oneof": [
+                            {
+                                "$ref": "#/components/schemas/Donor"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Receiver"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Receiver": {
+                "type": "object",
+                "properties": {
+                    "maxAmount": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Donor": {
+                "type": "object",
+                "properties": {
+                    "paymentInformation": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
