@@ -1,0 +1,116 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "jtabac api",
+        "version": "1.0.0"
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "productType": {
+                        "description": "either food or ticket",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "commmercialType": {
+                        "type": "string",
+                        "enum": [
+                            "DONATION",
+                            "SALE"
+                        ]
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "requester": {
+                        "$ref": "#/components/schemas/Requester"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ReservationStatus"
+                    }
+                }
+            },
+            "ReservationStatus": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "PENDING",
+                            "APPROVED",
+                            "REJECTED"
+                        ]
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "customer": {
+                        "oneof": [
+                            {
+                                "$ref": "#/components/schemas/Donor"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Receiver"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Receiver": {
+                "type": "object",
+                "properties": {
+                    "maxAmount" : {
+                        "type": "number"
+                    }
+                }
+            },
+            "Donor": {
+                "type": "object",
+                "properties": {
+                    "paymentInformation": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

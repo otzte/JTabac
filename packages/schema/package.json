@@ -1,0 +1,23 @@
+{
+  "name": "jtabac-schema",
+  "version": "0.0.1",
+  "description": "schema files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "tsc --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otzte/JTabac.git#data-schema"
+  },
+  "author": "tabac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otzte/JTabac/issues"
+  },
+  "homepage": "https://github.com/otzte/JTabac/tree/data-schema#readme",
+  "dependencies": {
+    "openapi-typescript": "^6.7.0"
+  }
+}
