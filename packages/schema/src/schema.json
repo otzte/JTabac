@@ -50,7 +50,7 @@
                         "type": "number"
                     },
                     "requester": {
-                        "$ref": "#/components/schemas/Requester"
+                        "$ref": "#/components/schemas/Customer"
                     },
                     "status": {
                         "$ref": "#/components/schemas/ReservationStatus"
