@@ -1,0 +1,74 @@
+{
+    "donors": [
+        {
+            "restaurant": "Thai & Turf - Steakhouse",
+            "kitchen": "thailändisch",
+            "type": "Essen",
+            "numberPortions": "2",
+            "availability": "Ab 13 Uhr"
+        },
+        {
+            "restaurant": "Kabuki Frankfurt",
+            "kitchen": "japanisch",
+            "type": "Essen",
+            "numberPortions": "1",
+            "availability": "Ab 15 UHr"
+        },
+        {
+            "restaurant": "Mainkai Cafe",
+            "kitchen": "international",
+            "type": "Getränk",
+            "numberPortions": "5",
+            "availability": "Von 8 pm"
+        },
+        {
+            "restaurant": "Romer Pils Brunnen",
+            "kitchen": "deutsch",
+            "type": "Essen",
+            "numberPortions": "10",
+            "availability": "Von 7:30 bis 19:00"
+        },
+        {
+            "restaurant": "Eis Christina",
+            "kitchen": "i",
+            "type": "Getränk",
+            "numberPortions": "2",
+            "availability": "Ab 20 Uhr"
+        },
+        {
+            "restaurant": "Iwase",
+            "kitchen": "japanisch",
+            "type": "Essen und Getränk",
+            "numberPortions": "1",
+            "availability": "Von 19 Uhr bis 21 Uhr"
+        },
+        {
+            "restaurant": "Wacker's Kaffee Geschäft",
+            "kitchen": "italienisch",
+            "type": "Essen",
+            "numberPortions": "4",
+            "availability": "Von 7 Uhr bis 10 Uhr"
+        },
+        {
+            "restaurant": "Cafe Nostalgie Frankfurt",
+            "kitchen": "türkisch",
+            "type": "Getränk",
+            "numberPortions": "2",
+            "availability": "Von 11 Uhr bis 21 Uhr"
+        },
+        {
+            "restaurant": "Ebbelwoi Unser",
+            "kitchen": "deutsch",
+            "type": "Essen",
+            "numberPortions": "3",
+            "availability": "Von 7 Uhr bis 22 Uhr"
+        },
+        {
+            "restaurant": "Cafe Eiding",
+            "kitchen": "französisch",
+            "type": "Getränk",
+            "numberPortions": "20",
+            "availability": "Bis 15 Uhr"
+        }
+    ]
+}
