@@ -11,7 +11,6 @@ import * as issuers from "../../mocks/isIssue.json"
 import * as receivers from "../../mocks/receiver.json"
 import { components } from "jtabac-schema"
 
-type Product = components["schemas"]["Product"];
 
 export async function HttpMock(
   request: HttpRequest,
