@@ -4,7 +4,7 @@
         "title": "jtabac api",
         "version": "1.0.0"
     },
-    "path": {
+    "paths": {
         "/reservations": {
             "get": {
                 "summary": "Get all reservations",

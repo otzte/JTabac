@@ -4,7 +4,26 @@
  */
 
 
-export type paths = Record<string, never>;
+export interface paths {
+  "/reservations": {
+    /** Get all reservations */
+    get: operations["getReservations"];
+    /** Create a new reservation */
+    post: operations["createReservation"];
+  };
+  "/products": {
+    /** Get all products */
+    get: operations["getProducts"];
+    /** Create a new product */
+    post: operations["createProduct"];
+  };
+  "/customers": {
+    /** Get all customers */
+    get: operations["getCustomers"];
+    /** Create a new customer */
+    post: operations["createCustomer"];
+  };
+}
 
 export type webhooks = Record<string, never>;
 
@@ -57,4 +76,90 @@ export type $defs = Record<string, never>;
 
 export type external = Record<string, never>;
 
-export type operations = Record<string, never>;
+export interface operations {
+
+  /** Get all reservations */
+  getReservations: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Reservation"][];
+        };
+      };
+    };
+  };
+  /** Create a new reservation */
+  createReservation: {
+    /** @description Reservation to create */
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["Reservation"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Reservation"];
+        };
+      };
+    };
+  };
+  /** Get all products */
+  getProducts: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Product"][];
+        };
+      };
+    };
+  };
+  /** Create a new product */
+  createProduct: {
+    /** @description Product to create */
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["Product"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+    };
+  };
+  /** Get all customers */
+  getCustomers: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Customer"][];
+        };
+      };
+    };
+  };
+  /** Create a new customer */
+  createCustomer: {
+    /** @description Customer to create */
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["Customer"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Customer"];
+        };
+      };
+    };
+  };
+}
