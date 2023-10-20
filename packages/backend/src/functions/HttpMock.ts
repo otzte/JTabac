@@ -4,8 +4,11 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from "@azure/functions";
-import * as concerts from "../../mocks/konzertmock.json";
+import * as concerts from "../../mocks/concerts.json";
 import * as locations from "../../mocks/locations.json";
+import * as donors from "../../mocks/donors.json"
+import * as issuers from "../../mocks/isIssue.json"
+import * as receivers from "../../mocks/receiver.json"
 
 export async function HttpMock(
   request: HttpRequest,
@@ -22,6 +25,19 @@ export async function HttpMock(
   }
   if (category === "locations") {
     const mockData = locations;
+    return { jsonBody: mockData };
+  }
+
+  if (category === "donors") {
+    const mockData = donors;
+    return { jsonBody: mockData };
+  }
+  if (category === "issuers") {
+    const mockData = issuers;
+    return { jsonBody: mockData };
+  }
+  if (category === "receivers") {
+    const mockData = receivers;
     return { jsonBody: mockData };
   }
   return;
