@@ -4,7 +4,7 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from "@azure/functions";
-import * as konzerts from "../../mocks/konzertmock.json";
+import * as concerts from "../../mocks/konzertmock.json";
 import * as locations from "../../mocks/locations.json";
 
 export async function HttpMock(
@@ -16,8 +16,8 @@ export async function HttpMock(
   console.log(category);
 
   //mock data
-  if (category === "konzerts") {
-    const mockData = konzerts;
+  if (category === "concerts") {
+    const mockData = concerts;
     return { jsonBody: mockData };
   }
   if (category === "locations") {
