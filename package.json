@@ -1,8 +1,9 @@
 {
-  "name": "react-ts",
+  "name": "jtabac",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Collabothon smart city challenge project.",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
