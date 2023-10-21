@@ -23,8 +23,12 @@ import {
   Tr,
   VStack,
 } from "@chakra-ui/react";
+import { useRecoilValue } from "recoil";
+import { productsState } from "../../state";
 
 export const Restaurant = () => {
+  const products = useRecoilValue(productsState);
+
   return (
     <Box margin={5}>
       <VStack spacing={8}>
@@ -142,6 +146,37 @@ export const Restaurant = () => {
                   </FormControl>
                 </Td>
               </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        <Heading>Aus der Datenbank</Heading>
+
+        <Heading>... aus der Datenbank: Products</Heading>
+        <TableContainer width={"100%"} whiteSpace={"normal"}>
+          <Table variant="simple">
+            <TableCaption>Angebote in deiner Nähe</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>name</Th>
+                <Th>productType</Th>
+                <Th>amount</Th>
+                <Th>price</Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {products.map((product) => (
+                <Tr>
+                  <Td>{product.name}</Td>
+                  <Td>{product.productType}</Td>
+                  <Td>{product.amount}</Td>
+                  <Td>{product.price}</Td>
+                  <Td>
+                    <Button size="sm">Reservieren</Button>
+                  </Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </TableContainer>
