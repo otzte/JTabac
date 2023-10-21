@@ -40,10 +40,10 @@ export async function HttpMock(
       }
     }
     if(request.method === "POST"){
-      await createDatabaseEntry(request.body as Product | Order | User | Location);
+      const data = await request.json();
+      await createDatabaseEntry(request.params.category, data);
       return {
-        status: 200,
-        jsonBody: {}
+        status: 201,
       }
     }
   } catch (error) {

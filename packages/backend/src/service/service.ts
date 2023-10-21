@@ -1,16 +1,33 @@
 import db from "../database/knex";
 import { User, Product, Order, Location } from "../functions/HttpMock";
 
-let queryBuilder = db.queryBuilder();
-
-export async function createDatabaseEntry(data: Product | User | Order | Location) { 
-
-}
-
+type Datatype = "orders" | "products" | "users" | "locations";
 type GetDatabaseEntryReturnType<T> = T extends "orders" ? Order : T extends "products" ? Product : T extends "users" ? User : T extends "locations" ? Location : never;
 
-export async function getDatabaseEntry<T extends "orders" | "users" | "locations" | "products">(type: T): Promise<GetDatabaseEntryReturnType<T>> {
-    console.log("Type", type);
+export async function createDatabaseEntry(type: Datatype, data: Product | User | Order | Location) { 
+    
+    console.log(data);
+    
+    if (type === "orders") {
+        // create new order in database
+        await db("Order").insert(data as Order);
+    }
+    if (type === "users") {
+        // create new user in database
+        const res = await db("Users").insert(data as User);
+        console.log(res);
+    }
+    if (type === "locations") {
+        // create new location in database
+        await db("Location").insert(data as Location);
+    }
+    if (type === "products") {
+        // create new product in database
+        await db("Products").insert(data as Product);
+    }
+}
+
+export async function getDatabaseEntry<T extends Datatype>(type: T): Promise<GetDatabaseEntryReturnType<T>> {
     if  (type === "orders") {
         // return all orders from database
        const orders = await db("Order").select("*");
