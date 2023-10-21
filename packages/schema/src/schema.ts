@@ -5,11 +5,11 @@
 
 
 export interface paths {
-  "/reservations": {
+  "/orders": {
     /** Get all reservations */
-    get: operations["getReservations"];
+    get: operations["getOrders"];
     /** Create a new reservation */
-    post: operations["createReservation"];
+    post: operations["createOrder"];
   };
   "/products": {
     /** Get all products */
@@ -17,11 +17,17 @@ export interface paths {
     /** Create a new product */
     post: operations["createProduct"];
   };
-  "/customers": {
-    /** Get all customers */
-    get: operations["getCustomers"];
-    /** Create a new customer */
-    post: operations["createCustomer"];
+  "/users": {
+    /** Get all Users */
+    get: operations["getUsers"];
+    /** Create a new User */
+    post: operations["createUser"];
+  };
+  "/locations": {
+    /** Get all locations */
+    get: operations["getLocations"];
+    /** Create a new location */
+    post: operations["createLocation"];
   };
 }
 
@@ -30,39 +36,44 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     Product: {
+      id?: number;
+      name: string;
+      /** @description a product with price of 0 is a donation */
+      price: number;
+    };
+    Order: {
       id?: string;
-      name?: string;
-      /** @description either food or ticket */
-      productType?: string;
-      amount?: number;
-      price?: number;
+      /** @description product id */
+      productId?: number;
+      /** @description user id of the requester */
+      receiverUserId?: string;
+      /** @description user id of the donor */
+      donorUserId?: string;
       /** @enum {string} */
-      commmercialType?: "DONATION" | "SALE";
-    };
-    Reservation: {
-      id?: string;
-      name?: string;
-      product?: components["schemas"]["Product"];
-      amount?: number;
-      requester?: components["schemas"]["Customer"];
-      status?: components["schemas"]["ReservationStatus"];
-    };
-    ReservationStatus: {
+      status?: "created" | "paid" | "reserved" | "booked" | "reversed" | "pending" | "finished";
       /** @enum {string} */
-      status?: "PENDING" | "APPROVED" | "REJECTED";
-      /** Format: date-time */
-      timestamp?: string;
+      workflow?: "w1" | "w2" | "w3" | "w4";
     };
-    Customer: {
+    User: {
       id?: string;
+      name: string;
+      /** @enum {string} */
+      type: "donor" | "receiver" | "organizer";
+    };
+    Location: {
+      /** @description user id of the location owner */
+      user?: string;
       name?: string;
-      customer?: unknown;
-    };
-    Receiver: {
-      maxAmount?: number;
-    };
-    Donor: {
-      paymentInformation?: string;
+      street?: string;
+      houseNo?: string;
+      city?: string;
+      zipCode?: string;
+      lat?: number;
+      lon?: number;
+      type?: string;
+      openingHoursText?: string;
+      description?: string;
+      offerTimeText?: string;
     };
   };
   responses: never;
@@ -79,29 +90,29 @@ export type external = Record<string, never>;
 export interface operations {
 
   /** Get all reservations */
-  getReservations: {
+  getOrders: {
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Reservation"][];
+          "application/json": components["schemas"]["Order"][];
         };
       };
     };
   };
   /** Create a new reservation */
-  createReservation: {
-    /** @description Reservation to create */
+  createOrder: {
+    /** @description Order to create */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["Reservation"];
+        "application/json": components["schemas"]["Order"];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Reservation"];
+          "application/json": components["schemas"]["Order"];
         };
       };
     };
@@ -134,30 +145,58 @@ export interface operations {
       };
     };
   };
-  /** Get all customers */
-  getCustomers: {
+  /** Get all Users */
+  getUsers: {
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Customer"][];
+          "application/json": components["schemas"]["User"][];
         };
       };
     };
   };
-  /** Create a new customer */
-  createCustomer: {
-    /** @description Customer to create */
+  /** Create a new User */
+  createUser: {
+    /** @description User to create */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["Customer"];
+        "application/json": components["schemas"]["User"];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Customer"];
+          "application/json": components["schemas"]["User"];
+        };
+      };
+    };
+  };
+  /** Get all locations */
+  getLocations: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Location"][];
+        };
+      };
+    };
+  };
+  /** Create a new location */
+  createLocation: {
+    /** @description Location to create */
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["Location"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Location"];
         };
       };
     };

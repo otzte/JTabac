@@ -5,10 +5,10 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/reservations": {
+        "/orders": {
             "get": {
                 "summary": "Get all reservations",
-                "operationId": "getReservations",
+                "operationId": "getOrders",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -17,7 +17,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Reservation"
+                                        "$ref": "#/components/schemas/Order"
                                     }
                                 }
                             }
@@ -27,13 +27,13 @@
             },
             "post": {
                 "summary": "Create a new reservation",
-                "operationId": "createReservation",
+                "operationId": "createOrder",
                 "requestBody": {
-                    "description": "Reservation to create",
+                    "description": "Order to create",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Reservation"
+                                "$ref": "#/components/schemas/Order"
                             }
                         }
                     }
@@ -44,7 +44,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Reservation"
+                                    "$ref": "#/components/schemas/Order"
                                 }
                             }
                         }
@@ -99,10 +99,10 @@
                 }
             }
         },
-        "/customers": {
+        "/users": {
             "get": {
-                "summary": "Get all customers",
-                "operationId": "getCustomers",
+                "summary": "Get all Users",
+                "operationId": "getUsers",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -111,7 +111,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Customer"
+                                        "$ref": "#/components/schemas/User"
                                     }
                                 }
                             }
@@ -120,14 +120,14 @@
                 }
             },
             "post": {
-                "summary": "Create a new customer",
-                "operationId": "createCustomer",
+                "summary": "Create a new User",
+                "operationId": "createUser",
                 "requestBody": {
-                    "description": "Customer to create",
+                    "description": "User to create",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Customer"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -138,7 +138,54 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Customer"
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/locations": {
+            "get": {
+                "summary": "Get all locations",
+                "operationId": "getLocations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new location",
+                "operationId": "createLocation",
+                "requestBody": {
+                    "description": "Location to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Location"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Location"
                                 }
                             }
                         }
@@ -151,34 +198,70 @@
         "schemas": {
             "Product": {
                 "type": "object",
+                "required": [
+                    "name",
+                    "price"
+                ],
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"
-                    },
-                    "productType": {
-                        "description": "either food or ticket",
-                        "type": "string"
-                    },
-                    "amount": {
-                        "type": "number"
                     },
                     "price": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "a product with price of 0 is a donation"
+                    }
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
                     },
-                    "commmercialType": {
+                    "productId": {
+                        "description": "product id",
+                        "type": "integer"
+                    },
+                    "receiverUserId": {
+                        "description": "user id of the requester",
+                        "type": "string"
+                    },
+                    "donorUserId": {
+                        "description": "user id of the donor",
+                        "type": "string"
+                    },
+                    "status": {
                         "type": "string",
                         "enum": [
-                            "DONATION",
-                            "SALE"
+                            "created",
+                            "paid",
+                            "reserved",
+                            "booked",
+                            "reversed",
+                            "pending",
+                            "finished"
+                        ]
+                    },
+                    "workflow": {
+                        "type": "string",
+                        "enum": [
+                            "w1",
+                            "w2",
+                            "w3",
+                            "w4"
                         ]
                     }
                 }
             },
-            "Reservation": {
+            "User": {
                 "type": "object",
+                "required": [
+                    "name",
+                    "type"
+                ],
                 "properties": {
                     "id": {
                         "type": "string"
@@ -186,70 +269,54 @@
                     "name": {
                         "type": "string"
                     },
-                    "product": {
-                        "$ref": "#/components/schemas/Product"
-                    },
-                    "amount": {
-                        "type": "number"
-                    },
-                    "requester": {
-                        "$ref": "#/components/schemas/Customer"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/ReservationStatus"
-                    }
-                }
-            },
-            "ReservationStatus": {
-                "type": "object",
-                "properties": {
-                    "status": {
+                    "type": {
                         "type": "string",
                         "enum": [
-                            "PENDING",
-                            "APPROVED",
-                            "REJECTED"
+                            "donor",
+                            "receiver",
+                            "organizer"
                         ]
-                    },
-                    "timestamp": {
-                        "type": "string",
-                        "format": "date-time"
                     }
                 }
             },
-            "Customer": {
+            "Location": {
                 "type": "object",
                 "properties": {
-                    "id": {
+                    "user": {
+                        "description": "user id of the location owner",
                         "type": "string"
                     },
                     "name": {
                         "type": "string"
                     },
-                    "customer": {
-                        "oneof": [
-                            {
-                                "$ref": "#/components/schemas/Donor"
-                            },
-                            {
-                                "$ref": "#/components/schemas/Receiver"
-                            }
-                        ]
-                    }
-                }
-            },
-            "Receiver": {
-                "type": "object",
-                "properties": {
-                    "maxAmount": {
+                    "street": {
+                        "type": "string"
+                    },
+                    "houseNo": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "type": "string"
+                    },
+                    "lat": {
                         "type": "number"
-                    }
-                }
-            },
-            "Donor": {
-                "type": "object",
-                "properties": {
-                    "paymentInformation": {
+                    },
+                    "lon": {
+                        "type": "number"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "openingHoursText": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "offerTimeText": {
                         "type": "string"
                     }
                 }
