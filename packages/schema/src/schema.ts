@@ -56,7 +56,8 @@ export interface components {
     };
     User: {
       id?: number;
-      name: string;
+      email: string;
+      password: string;
       /** @enum {string} */
       type: "donor" | "receiver" | "organizer";
     };

@@ -259,14 +259,18 @@
             "User": {
                 "type": "object",
                 "required": [
-                    "name",
+                    "email",
+                    "password",
                     "type"
                 ],
                 "properties": {
                     "id": {
                         "type": "integer"
                     },
-                    "name": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
                         "type": "string"
                     },
                     "type": {
