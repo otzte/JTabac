@@ -42,11 +42,11 @@ export interface components {
       price: number;
     };
     Order: {
-      id?: string;
+      id?: number;
       /** @description product id */
       productId?: number;
       /** @description user id of the requester */
-      receiverUserId?: string;
+      receiverUserId?: number;
       /** @description user id of the donor */
       donorUserId?: string;
       /** @enum {string} */
@@ -55,15 +55,15 @@ export interface components {
       workflow?: "w1" | "w2" | "w3" | "w4";
     };
     User: {
-      id?: string;
+      id?: number;
       name: string;
       /** @enum {string} */
       type: "donor" | "receiver" | "organizer";
     };
     Location: {
       /** @description user id of the location owner */
-      user?: string;
-      name?: string;
+      user: number;
+      name: string;
       street?: string;
       houseNo?: string;
       city?: string;
