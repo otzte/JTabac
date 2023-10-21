@@ -7,6 +7,7 @@ import {
 
 import { components } from "jtabac-schema"
 import { createDatabaseEntry, getDatabaseEntry } from "../service/service";
+import { isValidPath } from "./validation";
 
 // Products can be added by organizers
 // Reservations can be made by receivers
@@ -25,8 +26,14 @@ export async function HttpMock(
   context: InvocationContext
 ): Promise<HttpResponseInit> {
   try {
-    if(request.method === "GET"){
-      const data = await getDatabaseEntry(request.params.category as "orders" | "products" | "users" | "locations" | "undefined");
+    if(!isValidPath(request.params.category)){
+      return {
+        status: 404,
+        body: "Not Found"
+      }
+    }
+    if(request.method === "GET"){      
+      const data = await getDatabaseEntry(request.params.category);
       return {
         status: 200,
         jsonBody: data
