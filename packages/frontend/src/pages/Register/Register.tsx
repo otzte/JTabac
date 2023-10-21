@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Progress,
   Box,
@@ -17,55 +17,55 @@ import {
   Textarea,
   FormHelperText,
   InputRightElement,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { concertsState } from "../../state";
 
 const Form1 = () => {
-  const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
   const concerts = useRecoilValue(concertsState);
   return (
     <>
-      <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Organizer Registration
       </Heading>
 
       <FormControl mr="5%">
-        <FormLabel htmlFor="Event" fontWeight={'normal'}>
+        <FormLabel htmlFor="Event" fontWeight={"normal"}>
           Event
         </FormLabel>
-        <Input id="name-event" placeholder="Name of an event" required/>
+        <Input id="name-event" placeholder="Name of an event" required />
       </FormControl>
 
       <FormControl>
-        <FormLabel htmlFor="Place" fontWeight={'normal'}>
+        <FormLabel htmlFor="Place" fontWeight={"normal"}>
           Place
         </FormLabel>
-        <Input id="place" placeholder="Frankfurt am Main" required/>
+        <Input id="place" placeholder="Frankfurt am Main" required />
       </FormControl>
 
       <FormControl mt="2%">
-        <FormLabel htmlFor="Time" fontWeight={'normal'}>
+        <FormLabel htmlFor="Time" fontWeight={"normal"}>
           Time
         </FormLabel>
-        <Input id="time" type="date" required/>
+        <Input id="time" type="date" required />
       </FormControl>
 
       <FormControl mt="2%">
-        <FormLabel htmlFor="NumberOfPlaces" fontWeight={'normal'}>
+        <FormLabel htmlFor="NumberOfPlaces" fontWeight={"normal"}>
           Number of places
         </FormLabel>
-        <Input id="NrOfPlaces" required/>
+        <Input id="NrOfPlaces" required />
       </FormControl>
 
       <FormControl mt="2%">
-        <FormLabel htmlFor="Salesperiod" fontWeight={'normal'}>
+        <FormLabel htmlFor="Salesperiod" fontWeight={"normal"}>
           Sales period
         </FormLabel>
-        <Input id="salesPeriod" required/>
+        <Input id="salesPeriod" required />
       </FormControl>
 
       <FormControl as={GridItem} colSpan={[3, 2]}>
@@ -74,18 +74,20 @@ const Form1 = () => {
           fontWeight="md"
           color="gray.700"
           _dark={{
-            color: 'gray.50',
-          }}>
+            color: "gray.50",
+          }}
+        >
           Website
         </FormLabel>
         <InputGroup size="sm">
           <InputLeftAddon
             bg="gray.50"
             _dark={{
-              bg: 'gray.800',
+              bg: "gray.800",
             }}
             color="gray.500"
-            rounded="md">
+            rounded="md"
+          >
             http://
           </InputLeftAddon>
           <Input
@@ -96,26 +98,24 @@ const Form1 = () => {
           />
         </InputGroup>
       </FormControl>
-
     </>
-  )
-}
+  );
+};
 
 const Form2 = () => {
   return (
     <>
-      <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         "+1" tickets?
       </Heading>
-      
     </>
-  )
-}
+  );
+};
 
 export const Register = () => {
-  const toast = useToast()
-  const [step, setStep] = useState(1)
-  const [progress, setProgress] = useState(50)
+  const toast = useToast();
+  const [step, setStep] = useState(1);
+  const [progress, setProgress] = useState(50);
   return (
     <>
       <Box
@@ -125,37 +125,46 @@ export const Register = () => {
         maxWidth={800}
         p={6}
         m="10px auto"
-        as="form">
-        <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
+        as="form"
+      >
+        <Progress
+          hasStripe
+          value={progress}
+          mb="5%"
+          mx="5%"
+          isAnimated
+        ></Progress>
         {step === 1 ? <Form1 /> : <Form2 />}
         <ButtonGroup mt="5%" w="100%">
           <Flex w="100%" justifyContent="space-between">
             <Flex>
               <Button
                 onClick={() => {
-                  setStep(step - 1)
-                  setProgress(progress - 50)
+                  setStep(step - 1);
+                  setProgress(progress - 50);
                 }}
                 isDisabled={step === 1}
                 colorScheme="teal"
                 variant="solid"
                 w="7rem"
-                mr="5%">
+                mr="5%"
+              >
                 Back
               </Button>
               <Button
                 w="7rem"
                 isDisabled={step === 2}
                 onClick={() => {
-                  setStep(step + 1)
+                  setStep(step + 1);
                   if (step === 2) {
-                    setProgress(100)
+                    setProgress(100);
                   } else {
-                    setProgress(progress + 50)
+                    setProgress(progress + 50);
                   }
                 }}
                 colorScheme="teal"
-                variant="outline">
+                variant="outline"
+              >
                 Next
               </Button>
             </Flex>
@@ -166,13 +175,14 @@ export const Register = () => {
                 variant="solid"
                 onClick={() => {
                   toast({
-                    title: 'Account created.',
+                    title: "Account created.",
                     description: "We've created your account for you.",
-                    status: 'success',
+                    status: "success",
                     duration: 3000,
                     isClosable: true,
-                  })
-                }}>
+                  });
+                }}
+              >
                 Submit
               </Button>
             ) : null}
@@ -180,5 +190,5 @@ export const Register = () => {
         </ButtonGroup>
       </Box>
     </>
-  )
+  );
 };
