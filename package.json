@@ -16,5 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
   }
 }

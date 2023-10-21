@@ -1,0 +1,326 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "jtabac api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/orders": {
+            "get": {
+                "summary": "Get all reservations",
+                "operationId": "getOrders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Order"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new reservation",
+                "operationId": "createOrder",
+                "requestBody": {
+                    "description": "Order to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "summary": "Get all products",
+                "operationId": "getProducts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new product",
+                "operationId": "createProduct",
+                "requestBody": {
+                    "description": "Product to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "summary": "Get all Users",
+                "operationId": "getUsers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new User",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "User to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/locations": {
+            "get": {
+                "summary": "Get all locations",
+                "operationId": "getLocations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new location",
+                "operationId": "createLocation",
+                "requestBody": {
+                    "description": "Location to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Location"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Location"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "price"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "a product with price of 0 is a donation"
+                    }
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "productId": {
+                        "description": "product id",
+                        "type": "integer"
+                    },
+                    "receiverUserId": {
+                        "description": "user id of the requester",
+                        "type": "string"
+                    },
+                    "donorUserId": {
+                        "description": "user id of the donor",
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "created",
+                            "paid",
+                            "reserved",
+                            "booked",
+                            "reversed",
+                            "pending",
+                            "finished"
+                        ]
+                    },
+                    "workflow": {
+                        "type": "string",
+                        "enum": [
+                            "w1",
+                            "w2",
+                            "w3",
+                            "w4"
+                        ]
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "type"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "donor",
+                            "receiver",
+                            "organizer"
+                        ]
+                    }
+                }
+            },
+            "Location": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "description": "user id of the location owner",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "street": {
+                        "type": "string"
+                    },
+                    "houseNo": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "type": "string"
+                    },
+                    "lat": {
+                        "type": "number"
+                    },
+                    "lon": {
+                        "type": "number"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "openingHoursText": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "offerTimeText": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

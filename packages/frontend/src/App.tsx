@@ -16,34 +16,15 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRecoilState } from "recoil";
-import { Concert, concertsState } from "./state";
-
-const endpoint = "http://localhost:7071/api";
+import { productsState } from "./state";
+import { fetchProducts } from "./dataFetcher";
 
 function App() {
-  const [_, setConcerts] = useRecoilState(concertsState);
+  const [_, setProducts] = useRecoilState(productsState);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`${endpoint}/concerts`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const concertsResult = await response.json();
-        setConcerts(
-          concertsResult.concerts.map(
-            (c) =>
-              ({
-                data: new Date(c.data),
-                interpret: c.interpret,
-                price: parseFloat(c.price),
-              } as Concert)
-          )
-        );
-      } catch (error) {
-        console.error("could not get data", error);
-      }
+      setProducts(await fetchProducts());
     };
 
     fetchData();
