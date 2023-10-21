@@ -21,3 +21,13 @@ export const reservationsState = atom({
   key: "reservations",
   default: [] as components["schemas"]["Reservation"][],
 });
+
+export interface Login {
+  type: "donor" | "receiver" | "organizer";
+  username: string;
+}
+
+export const loginState = atom({
+  key: "login",
+  default: {} as Login,
+});
