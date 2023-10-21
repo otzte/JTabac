@@ -219,7 +219,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "productId": {
                         "description": "product id",
@@ -227,7 +227,7 @@
                     },
                     "receiverUserId": {
                         "description": "user id of the requester",
-                        "type": "string"
+                        "type": "integer"
                     },
                     "donorUserId": {
                         "description": "user id of the donor",
@@ -264,7 +264,7 @@
                 ],
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"
@@ -281,10 +281,11 @@
             },
             "Location": {
                 "type": "object",
+                "required": ["user", "name"],
                 "properties": {
                     "user": {
                         "description": "user id of the location owner",
-                        "type": "string"
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"

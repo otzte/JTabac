@@ -7,5 +7,6 @@ import { Product, Order, User, Location } from "./HttpMock";
 type RemoveFirstLetter<S extends string> = S extends `${infer _}${infer Rest}` ? Rest : S;
 
 export function isValidPath(path: string): path is RemoveFirstLetter<keyof paths> {
-    return `/${path}` in ["/orders", "/products", "/users", "/locations"];
+    console.log(path);
+    return ["/orders", "/products", "/users", "/locations"].includes(`/${path}`);
 }
