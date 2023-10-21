@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Collabothon smart city challenge project.",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "host": "vite --host",
     "build": "tsc && vite build",

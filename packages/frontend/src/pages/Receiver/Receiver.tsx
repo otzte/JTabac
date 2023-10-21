@@ -31,7 +31,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { concertsState } from "../../state";
+import { concertsState, productsState } from "../../state";
 
 type OfferType = "" | "food" | "concert" | "cinema" | "street-art" | "theater";
 
@@ -42,6 +42,7 @@ export const Receiver = () => {
   const [persons, setPersons] = useState<number>(1);
   const [visibleFilters, setVisibleFilters] = useState<FilterType[]>([]);
   const concerts = useRecoilValue(concertsState);
+  const products = useRecoilValue(productsState);
 
   return (
     <Box margin={5}>
@@ -264,6 +265,35 @@ export const Receiver = () => {
                       currency: "EUR",
                     })}
                   </Td>
+                  <Td>
+                    <Button size="sm">Reservieren</Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        <Heading>... aus der Datenbank: Products</Heading>
+        <TableContainer width={"100%"} whiteSpace={"normal"}>
+          <Table variant="simple">
+            <TableCaption>Angebote in deiner Nähe</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>name</Th>
+                <Th>productType</Th>
+                <Th>amount</Th>
+                <Th>price</Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {products.map((product) => (
+                <Tr>
+                  <Td>{product.name}</Td>
+                  <Td>{product.productType}</Td>
+                  <Td>{product.amount}</Td>
+                  <Td>{product.price}</Td>
                   <Td>
                     <Button size="sm">Reservieren</Button>
                   </Td>
