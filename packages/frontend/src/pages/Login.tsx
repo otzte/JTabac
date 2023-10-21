@@ -6,8 +6,8 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { Login as LoginType, loginState } from "../state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Login as LoginType, loginState, usersState } from "../state";
 
 export const Login = () => {
   const [showPlain, setShowPlain] = useState(false);
@@ -15,26 +15,22 @@ export const Login = () => {
   const [username, setUsername] = useState("");
 
   const [_, setLogin] = useRecoilState(loginState);
+  const users = useRecoilValue(usersState);
 
   return (
     <>
       <Heading>Login</Heading>
       <form
         onSubmit={(e) => {
-          alert("onSubmit");
           e.preventDefault();
           if (username) {
-            let type = "receiver" as LoginType["type"];
-            if (username.startsWith("donor")) {
-              type = "donor";
+            const user = users.find((u) => u.email === username);
+            if (user) {
+              setLogin({
+                type: user.type,
+                id: user.id!,
+              });
             }
-            if (username.startsWith("organizer")) {
-              type = "organizer";
-            }
-            setLogin({
-              type,
-              username,
-            });
           }
         }}
       >

@@ -1,15 +1,9 @@
 import { atom } from "recoil";
 import { components } from "../../schema/dist";
 
-export interface Concert {
-  interpret?: string;
-  price?: number;
-  data?: Date;
-}
-
-export const concertsState = atom({
-  key: "concerts", // unique ID (with respect to other atoms/selectors)
-  default: [] as Concert[], // default value (aka initial value)
+export const locationsState = atom({
+  key: "locations", // unique ID (with respect to other atoms/selectors)
+  default: [] as components["schemas"]["Location"][], // default value (aka initial value)
 });
 
 export const productsState = atom({
@@ -17,14 +11,19 @@ export const productsState = atom({
   default: [] as components["schemas"]["Product"][],
 });
 
-export const reservationsState = atom({
-  key: "reservations",
-  default: [] as components["schemas"]["Reservation"][],
+export const ordersState = atom({
+  key: "orders",
+  default: [] as components["schemas"]["Order"][],
+});
+
+export const usersState = atom({
+  key: "users",
+  default: [] as components["schemas"]["User"][],
 });
 
 export interface Login {
   type: "donor" | "receiver" | "organizer";
-  username: string;
+  id: number;
 }
 
 export const loginState = atom({

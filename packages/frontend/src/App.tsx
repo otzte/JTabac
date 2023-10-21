@@ -17,26 +17,40 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRecoilState } from "recoil";
-import { loginState, productsState } from "./state";
-import { fetchProducts } from "./dataFetcher";
+import {
+  locationsState,
+  loginState,
+  ordersState,
+  productsState,
+  usersState,
+} from "./state";
+import {
+  fetchLocations,
+  fetchOrders,
+  fetchProducts,
+  fetchUsers,
+} from "./dataFetcher";
 import { W1S1Donor } from "./pages/w1/W1S1Donor";
-import { W1S2Organizer } from "./pages/w1/W1S2Organizer";
-import { W1S3Receiver } from "./pages/w1/W1S3Receiver";
-import { W1S4Organizer } from "./pages/w1/W1S4Organizer";
-import { W3S1Donor } from "./pages/w3/W3S1Donor";
-import { W3S3Receiver } from "./pages/w3/W3S3Receiver";
-import { W3S4Organizer } from "./pages/w3/W3S4Organizer";
-import { W3S5Receiver } from "./pages/w3/W3S5Receiver";
-import { W4S1Donor } from "./pages/w4/W4S1Donor";
 import { Overview } from "./pages/Overview";
+import { RegisterUser } from "./pages/RegisterUser";
 
 function App() {
-  const [_, setProducts] = useRecoilState(productsState);
   const [login, setLogin] = useRecoilState(loginState);
+  const [_1, setProducts] = useRecoilState(productsState);
+  const [_2, setUsers] = useRecoilState(usersState);
+  const [_3, setOrders] = useRecoilState(ordersState);
+  const [_4, setLocations] = useRecoilState(locationsState);
 
   useEffect(() => {
     const fetchData = async () => {
-      setProducts(await fetchProducts());
+      const products = await fetchProducts();
+      setProducts(products);
+      const locations = await fetchLocations();
+      setLocations(locations);
+      const orders = await fetchOrders();
+      setOrders(orders);
+      const users = await fetchUsers();
+      setUsers(users);
     };
 
     fetchData();
@@ -71,7 +85,7 @@ function App() {
               </MenuItem>
             </MenuList>
           </Menu>
-          {login.username && (
+          {login.id && (
             <Button onClick={() => setLogin({} as any)}>Logout</Button>
           )}
         </Box>
@@ -82,16 +96,9 @@ function App() {
           <Route path="/donor-old" element={<Donor />} />
           <Route path="/receiver-old" element={<Receiver />} />
           <Route path="/w1s1" element={<W1S1Donor />} />
-          <Route path="/w1s2" element={<W1S2Organizer />} />
-          <Route path="/w1s3" element={<W1S3Receiver />} />
-          <Route path="/w1s4" element={<W1S4Organizer />} />
-          <Route path="/w3s1" element={<W3S1Donor />} />
-          <Route path="/w3s3" element={<W3S3Receiver />} />
-          <Route path="/w3s4" element={<W3S4Organizer />} />
-          <Route path="/w3s5" element={<W3S5Receiver />} />
-          <Route path="/w4s1" element={<W4S1Donor />} />
           <Route path="/" element={<Landing />} />
           <Route path="/overview" element={<Overview />} />
+          <Route path="/register" element={<RegisterUser />} />
         </Routes>
       </HashRouter>
     </div>
