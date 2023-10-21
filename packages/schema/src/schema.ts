@@ -58,7 +58,7 @@ export interface components {
       id?: string;
       name: string;
       /** @enum {string} */
-      type: "DONOR" | "RECEIVER" | "ORGANIZER";
+      type: "donor" | "receiver" | "organizer";
     };
     Location: {
       /** @description user id of the location owner */
