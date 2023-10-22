@@ -21,12 +21,11 @@ import {
 
 import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
-import { concertsState } from "../../state";
 
 const Form1 = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const concerts = useRecoilValue(concertsState);
+
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">

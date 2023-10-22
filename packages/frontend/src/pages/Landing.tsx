@@ -14,15 +14,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { Login as LoginType, loginState } from "../state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Login as LoginType, loginState, usersState } from "../state";
 
 export const Landing = () => {
   const [showPlain, setShowPlain] = useState(false);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const users = useRecoilValue(usersState);
 
   const [_, setLogin] = useRecoilState(loginState);
 
@@ -59,17 +60,13 @@ export const Landing = () => {
           alert("onSubmit");
           e.preventDefault();
           if (username) {
-            let type = "receiver" as LoginType["type"];
-            if (username.startsWith("donor")) {
-              type = "donor";
+            const user = users.find((u) => u.email === username);
+            if (user) {
+              setLogin({
+                type: user.type,
+                id: user.id!,
+              });
             }
-            if (username.startsWith("organizer")) {
-              type = "organizer";
-            }
-            setLogin({
-              type,
-              username,
-            });
           }
         }}
       >
