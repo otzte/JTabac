@@ -38,8 +38,6 @@ export const LocationTable = ({ locations, onClick }: ILocationTable) => {
                     <Th>City</Th>
                     <Th>Type</Th>
                     <Th>Description</Th>
-                    <Th>Opening hours</Th>
-                    <Th>Offer time</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -52,8 +50,6 @@ export const LocationTable = ({ locations, onClick }: ILocationTable) => {
                       <Td>{location.city}</Td>
                       <Td>{location.type}</Td>
                       <Td>{location.description}</Td>
-                      <Td>{location.openingHoursText}</Td>
-                      <Td>{location.offerTimeText}</Td>
                     </Tr>
                   ))}
                 </Tbody>
@@ -64,25 +60,20 @@ export const LocationTable = ({ locations, onClick }: ILocationTable) => {
                 <Thead>
                   <Tr>
                     <Th>Location</Th>
-                    <Th>Details</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {locations.map((location) => (
                     <Tr onClick={() => onClick((location as any).id)}>
                       <Td>
-                        <strong>{location.name}</strong>
-                        <br />
-                        {location.street} {location.houseNo}
-                        <br />
-                        {location.zipCode} {location.city}
-                      </Td>
-                      <Td>
+                        <div style={{ marginBottom: "5px" }}>
+                          <strong>{location.name}</strong>
+                        </div>
+                        <div style={{ marginBottom: "9px" }}>
+                          {location.street} {location.houseNo},
+                          {location.zipCode}
+                        </div>
                         {location.description}
-                        <br />
-                        Opening Hours: {location.openingHoursText}
-                        <br />
-                        Offers: {location.offerTimeText}
                       </Td>
                     </Tr>
                   ))}

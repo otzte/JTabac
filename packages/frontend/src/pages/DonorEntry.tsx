@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Stack } from "@chakra-ui/react";
 import { LocationTable } from "../components/Location/LocationTable";
 import { useRecoilValue } from "recoil";
 import {
@@ -21,9 +21,10 @@ export const DonorEntry = () => {
 
   const navigate = useNavigate();
 
+  console.log({ locations });
   return (
-    <>
-      <Heading>Participating Locations</Heading>
+    <Stack spacing={8} margin={5} mx={"auto"} maxW={"lg"} py={1} px={2}>
+      <Heading textAlign="center">Participating Locations</Heading>
       {!locationId && (
         <LocationTable locations={locations} onClick={setLocationId} />
       )}
@@ -48,6 +49,6 @@ export const DonorEntry = () => {
           }}
         />
       )}
-    </>
+    </Stack>
   );
 };

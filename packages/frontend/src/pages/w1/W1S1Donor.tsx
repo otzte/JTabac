@@ -23,7 +23,7 @@ export const W1S1Donor = () => {
   const product = products.find((p) => p.id === order?.productId);
   const login = useRecoilValue(loginState);
 
-  const status = "finished" as components["schemas"]["Order"]["status"];
+  const status = "reserved" as components["schemas"]["Order"]["status"];
 
   if (!login.type) {
     return <Login />;
